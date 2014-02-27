@@ -22,5 +22,13 @@ class FizzBuzzSpec extends Specification{
         2     || 2
         3	  || 'fizz'
         5 	  || 'buzz'
+        6     || 'fizz'
+        10    || 'buzz'
+        11    || 11
+        15    || 'fizzbuzz'
+        21    || 'fizz'
+        30    || 'fizzbuzz'
+        99    || 'fizz'
+        100   || 'buzz'
     }
 }
