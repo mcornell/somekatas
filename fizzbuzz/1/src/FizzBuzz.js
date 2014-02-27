@@ -1,3 +1,3 @@
 function fizzbuzz(num) {
-  return 1;
+  return (num === 3) ? "fizz" : num;
 }
