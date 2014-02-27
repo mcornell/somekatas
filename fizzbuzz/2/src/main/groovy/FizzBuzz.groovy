@@ -6,6 +6,12 @@
  */
 class FizzBuzz {
     def calculate(int num) {
-        num == 3 ? 'fizz' : num
+    	if (num % 5 == 0) {
+    		'buzz'
+    	} else if (num % 3 == 0) {
+    		'fizz'
+    	} else {
+    		num
+    	}
     }
 }

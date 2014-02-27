@@ -21,5 +21,6 @@ class FizzBuzzSpec extends Specification{
         1     || 1
         2     || 2
         3	  || 'fizz'
+        5 	  || 'buzz'
     }
 }
