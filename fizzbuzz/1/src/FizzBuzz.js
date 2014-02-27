@@ -1,6 +1,10 @@
 function fizzbuzz(num) {
-  if (num % 5 === 0) {
-    return "buzz";
+  var result = "";
+  if (num % 3 === 0) {
+    result = "fizz";
   }
-  return (num % 3 === 0) ? "fizz" : num;
+  if (num % 5 === 0) {
+    result = result.concat("buzz");
+  }
+  return (result) ? result : num;
 }
