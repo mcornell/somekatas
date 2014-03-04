@@ -34,7 +34,7 @@ class RomanNumerals {
     }
 
     def translate(String roman) {
-    	1
+    	roman.length()
 
     }
   

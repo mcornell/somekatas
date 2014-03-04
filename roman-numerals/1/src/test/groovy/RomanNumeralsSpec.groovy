@@ -52,7 +52,7 @@ class RomanNumeralsSpec extends Specification {
         where:
         roman             || arabic  
         'I'               || 1       
-        //'II'             || 2	   
+        'II'              || 2	   
         //'IV'              || 4       
         //'V'               || 5       
         //'VI'              || 6       
