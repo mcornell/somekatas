@@ -31,6 +31,7 @@ class RomanNumeralsSpec extends Specification {
         10     || 'X'
         19     || 'XIX'
         20     || 'XX'
+        40     || 'XL'
         50     || 'L'
     }
 }
