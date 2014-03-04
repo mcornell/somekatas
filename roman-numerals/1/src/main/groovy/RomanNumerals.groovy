@@ -5,23 +5,23 @@
  * @author mcornell, @date 3/3/14 9:13 PM
  */
 class RomanNumerals {
+
+	def ARABIC_TO_ROMAN = [
+		10 : 'X',
+		5  : 'V',
+		1  : 'I',
+	]
+
     def translate(int number) {
     	def roman = ''
-    	while (number > 9) {
-    		roman += 'X'
-    		number -= 10
+    	ARABIC_TO_ROMAN.each { 
+    		while (number > (it.key - 1)) {
+    			roman += it.value
+    			number -= it.key
+    		}
     	}
-
-    	while (number > 4) {
-    		roman += 'V'
-    		number -= 5
-    	}
-
-        while (number > 0) {
-        	roman += 'I'
-        	number--
-        }
-        return roman
-
+        roman
     }
+
+  
 }
