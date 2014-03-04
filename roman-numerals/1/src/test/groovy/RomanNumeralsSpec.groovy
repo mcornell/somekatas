@@ -53,7 +53,7 @@ class RomanNumeralsSpec extends Specification {
         roman             || arabic  
         'I'               || 1       
         'II'              || 2	   
-        //'IV'              || 4       
+        'IV'              || 4       
         'V'               || 5       
         'VI'              || 6       
         //'IX'              || 9       
@@ -61,13 +61,13 @@ class RomanNumeralsSpec extends Specification {
         //'XIX'             || 19      
         'XX'              || 20      
         //'XL'              || 40      
-        //'L'               || 50      
+        'L'               || 50      
         //'XC'              || 90 	   
-        //'C'               || 100     
+        'C'               || 100     
         //'CD'              || 400     
-        //'D'               || 500     
+        'D'               || 500     
         //'CM'              || 900     
-        //'M'               || 1000    
+        'M'               || 1000    
         //'MCMXC'           || 1990    
         //'MMXIV'           || 2014    
         //'MMMDCCCLXXXVIII' || 3888    
