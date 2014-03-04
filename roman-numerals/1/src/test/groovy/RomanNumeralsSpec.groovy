@@ -26,5 +26,7 @@ class RomanNumeralsSpec extends Specification {
         2	   || 'II'
         5      || 'V'
         6      || 'VI'
+        10     || 'X'
+        20     || 'XX'
     }
 }
