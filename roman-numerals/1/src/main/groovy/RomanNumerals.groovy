@@ -22,6 +22,12 @@ class RomanNumerals {
 		1    : 'I'
 	]
 
+	def ROMAN_TO_ARABIC = [
+		'X' : 10,
+		'V' : 5,
+		'I' : 1
+	]
+
     def translate(int number) {
     	def roman = ''
     	ARABIC_TO_ROMAN.each { 
@@ -36,17 +42,7 @@ class RomanNumerals {
     def translate(String roman) {
     	def arabic = 0
     	roman.each {
-    		if (it == 'X') {
-    			arabic += 10
-    		}
-    		
-    		if (it == 'V') {
-    			arabic += 5
-    		}
-    		if (it == 'I') {
-    			arabic += 1
-    		}
-
+    		arabic += ROMAN_TO_ARABIC[it]
     	}
     	arabic
     }
