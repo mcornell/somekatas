@@ -22,21 +22,7 @@ class RomanNumerals {
 		1    : 'I'
 	]
 
-	def ROMAN_TO_ARABIC = [
-		'M'  : 1000,
-		'CM' : 900,
-		'D'  : 500,
-		'CD' : 400,
-		'C'  : 100,
-		'XC' : 90,
-	    'L'  : 50,
-	    'XL' : 40,
-		'X'  : 10,
-		'IX' : 9,
-		'V'  : 5,
-		'IV' : 4,
-		'I'  : 1
-	]
+	def ROMAN_TO_ARABIC = ARABIC_TO_ROMAN.collectEntries { key, value -> [value, key] }
 
     def translate(int number) {
     	def roman = ''
@@ -50,10 +36,8 @@ class RomanNumerals {
     }
 
     def translate(String roman) {
-    	
     	def arabic = 0, romanLen = roman.length()
-		
-		for (int idx = 0; idx < romanLen; idx++) {
+		for (def idx = 0; idx < romanLen; idx++) {
 			def it = roman[idx]
 			if (idx < romanLen - 1 && ROMAN_TO_ARABIC["${it}${roman[idx+1]}"]) {
     			arabic += ROMAN_TO_ARABIC["${it}${roman[idx+1]}"]
@@ -62,8 +46,6 @@ class RomanNumerals {
     			arabic += ROMAN_TO_ARABIC[it] ?: 0
     		}
 		}
-    	
     	arabic
     }
-  
 }
