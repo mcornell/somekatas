@@ -6,6 +6,7 @@
  */
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class RomanNumeralsSpec extends Specification {
 
@@ -15,8 +16,12 @@ class RomanNumeralsSpec extends Specification {
 		romanNumerals = new RomanNumerals()
 	}
 
-    def "RomanNumerals can translate arabaic to roman"() {
+	@Unroll
+    def "RomanNumerals can translate #arabic to roman"() {
         expect:
-        romanNumerals.translate(1) == 'I'
+        romanNumerals.translate(arabic) == roman
+        where:
+        arabic || roman
+        1      || 'I'
     }
 }
