@@ -60,17 +60,17 @@ class RomanNumeralsSpec extends Specification {
         'X'               || 10      
         'XIX'             || 19      
         'XX'              || 20      
-        //'XL'              || 40      
+        'XL'              || 40      
         'L'               || 50      
-        //'XC'              || 90 	   
+        'XC'              || 90 	   
         'C'               || 100     
-        //'CD'              || 400     
+        'CD'              || 400     
         'D'               || 500     
-        //'CM'              || 900     
+        'CM'              || 900     
         'M'               || 1000    
-        //'MCMXC'           || 1990    
-        //'MMXIV'           || 2014    
-        //'MMMDCCCLXXXVIII' || 3888    
-        //'MMMCMXCIX'       || 3999    
+        'MCMXC'           || 1990    
+        'MMXIV'           || 2014    
+        'MMMDCCCLXXXVIII' || 3888    
+        'MMMCMXCIX'       || 3999    
     }
 }
