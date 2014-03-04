@@ -36,6 +36,10 @@ class RomanNumerals {
     def translate(String roman) {
     	def arabic = 0
     	roman.each {
+    		if (it == 'X') {
+    			arabic += 10
+    		}
+    		
     		if (it == 'V') {
     			arabic += 5
     		}
