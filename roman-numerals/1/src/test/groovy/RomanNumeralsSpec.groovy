@@ -23,5 +23,7 @@ class RomanNumeralsSpec extends Specification {
         where:
         arabic || roman
         1      || 'I'
+        2	   || 'II'
+        5      || 'V'
     }
 }

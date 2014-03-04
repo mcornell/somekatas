@@ -6,6 +6,17 @@
  */
 class RomanNumerals {
     def translate(int number) {
-        'I'
+    	def roman = ''
+    	while (number > 4) {
+    		roman += 'V'
+    		number -= 5
+    	}
+
+        while (number > 0) {
+        	roman += 'I'
+        	number--
+        }
+        return roman
+
     }
 }
