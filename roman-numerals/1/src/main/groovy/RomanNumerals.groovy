@@ -34,8 +34,17 @@ class RomanNumerals {
     }
 
     def translate(String roman) {
-    	roman.length()
+    	def arabic = 0
+    	roman.each {
+    		if (it == 'V') {
+    			arabic += 5
+    		}
+    		if (it == 'I') {
+    			arabic += 1
+    		}
 
+    	}
+    	arabic
     }
   
 }

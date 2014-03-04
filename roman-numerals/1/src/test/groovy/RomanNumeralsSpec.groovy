@@ -54,7 +54,7 @@ class RomanNumeralsSpec extends Specification {
         'I'               || 1       
         'II'              || 2	   
         //'IV'              || 4       
-        //'V'               || 5       
+        'V'               || 5       
         //'VI'              || 6       
         //'IX'              || 9       
         //'X'               || 10      
