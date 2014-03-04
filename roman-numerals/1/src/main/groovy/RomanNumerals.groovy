@@ -33,5 +33,9 @@ class RomanNumerals {
         roman
     }
 
+    def translate(String roman) {
+    	1
+
+    }
   
 }
