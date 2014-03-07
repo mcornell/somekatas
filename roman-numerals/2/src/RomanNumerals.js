@@ -55,46 +55,49 @@ function RomanNumerals() {
         roman: "I"
       }
     ],
-  };
 
-  obj["appendRomanValue"] = function(number, conversion) {
-    var numValue = conversion.arabic,
-      roman = conversion.roman;
-    while (number > (numValue - 1)) {
-      this.value += roman;
-      number = number - numValue;
+    appendRomanValue: function(number, conversion) {
+      var numValue = conversion.arabic,
+        roman = conversion.roman;
+      while (number > (numValue - 1)) {
+        this.value += roman;
+        number = number - numValue;
+      }
+      return number;
+    },
+
+    arabic2Roman: function(number) {
+      this.value = "";
+      for (var i in this.ARABIC_TO_ROMAN) {
+        number = this.appendRomanValue(number, this.ARABIC_TO_ROMAN[i]);
+      }
+      return this.value;
+    },
+
+    roman2Arabic: function(roman) {
+      this.value = 0;
+
+      for (var i = 0, len = roman.length; i < len; i++) {
+        if (i < roman.length - 1 && this.ROMAN_TO_ARABIC["" + roman[i] + roman[i + 1]] !== undefined) {
+          this.value += this.ROMAN_TO_ARABIC["" + roman[i] + roman[i + 1]];
+          i++;
+        }
+        else {
+          this.value += this.ROMAN_TO_ARABIC[roman[i]];
+        }
+      }
+      return this.value;
+    },
+    convert: function(number) {
+      var intRegex = /^\d+$/;
+      if (intRegex.test(number)) {
+        return this.arabic2Roman(number);
+      }
+      else {
+        return this.roman2Arabic(number);
+      }
+
     }
-    return number;
-  };
-
-  obj["arabic2Roman"] = function(number) {
-    this.value = "";
-    for (var i in this.ARABIC_TO_ROMAN) {
-      number = this.appendRomanValue(number, this.ARABIC_TO_ROMAN[i]);
-    }
-    return this.value;
-  };
-
-  obj["roman2Arabic"] = function(roman) {
-    this.value = 0;
-
-    for (var i = 0, len = roman.length; i < len; i++) {
-      console.log("roman[" + i + "]:" + roman[i]);
-      console.log("Map Value: " + this.ROMAN_TO_ARABIC[roman[i]]);
-      this.value += this.ROMAN_TO_ARABIC[roman[i]];
-    }
-    return this.value;
-  };
-
-  obj["convert"] = function(number) {
-    var intRegex = /^\d+$/;
-    if (intRegex.test(number)) {
-      return this.arabic2Roman(number);
-    }
-    else {
-      return this.roman2Arabic(number);
-    }
-
   };
 
   var map = {};
