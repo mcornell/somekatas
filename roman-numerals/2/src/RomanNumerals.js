@@ -1,44 +1,108 @@
 function RomanNumerals() {
-  value: "",
-  ARABIC_TO_ROMAN = {
-    1000: "M",
-    900: "CM",
-    500: "D",
-    400: "CD",
-    100: "C",
-    90: "XC",
-    50: "L",
-    40: "XL",
-    10: "X",
-    9: "IX",
-    5: "V",
-    4: "IV",
-    1: "I"
-  }
-};
+  var obj = {
+    value: "",
+    ARABIC_TO_ROMAN: [
+      {
+        arabic: 1000,
+        roman: "M"
+      },
+      {
+        arabic: 900,
+        roman: "CM"
+      },
+      {
+        arabic: 500,
+        roman: "D"
+      },
+      {
+        arabic: 400,
+        roman: "CD"
+      },
+      {
+        arabic: 100,
+        roman: "C"
+      },
+      {
+        arabic: 90,
+        roman: "XC"
+      },
+      {
+        arabic: 50,
+        roman: "L"
+      },
+      {
+        arabic: 40,
+        roman: "XL"
+      },
+      {
+        arabic: 10,
+        roman: "X"
+      },
+      {
+        arabic: 9,
+        roman: "IX"
+      },
+      {
+        arabic: 5,
+        roman: "V"
+      },
+      {
+        arabic: 4,
+        roman: "IV"
+      },
+      {
+        arabic: 1,
+        roman: "I"
+      }
+    ],
+  };
 
-RomanNumerals.prototype.appendValue = function(number, numValue) {
-  while (number > (numValue - 1)) {
-    this.value += ARABIC_TO_ROMAN[numValue];
-    number = number - numValue;
-  }
-  return number;
-}
+  obj["appendRomanValue"] = function(number, conversion) {
+    var numValue = conversion.arabic,
+      roman = conversion.roman;
+    while (number > (numValue - 1)) {
+      this.value += roman;
+      number = number - numValue;
+    }
+    return number;
+  };
 
-RomanNumerals.prototype.convert = function(number) {
-  this.value = "";
-  number = this.appendValue(number, 1000);
-  number = this.appendValue(number, 900);
-  number = this.appendValue(number, 500);
-  number = this.appendValue(number, 400);
-  number = this.appendValue(number, 100);
-  number = this.appendValue(number, 90);
-  number = this.appendValue(number, 50);
-  number = this.appendValue(number, 40);
-  number = this.appendValue(number, 10);
-  number = this.appendValue(number, 9);
-  number = this.appendValue(number, 5);
-  number = this.appendValue(number, 4);
-  number = this.appendValue(number, 1);
-  return this.value;
+  obj["arabic2Roman"] = function(number) {
+    this.value = "";
+    for (var i in this.ARABIC_TO_ROMAN) {
+      number = this.appendRomanValue(number, this.ARABIC_TO_ROMAN[i]);
+    }
+    return this.value;
+  };
+
+  obj["roman2Arabic"] = function(roman) {
+    this.value = 0;
+
+    for (var i = 0, len = roman.length; i < len; i++) {
+      console.log("roman[" + i + "]:" + roman[i]);
+      console.log("Map Value: " + this.ROMAN_TO_ARABIC[roman[i]]);
+      this.value += this.ROMAN_TO_ARABIC[roman[i]];
+    }
+    return this.value;
+  };
+
+  obj["convert"] = function(number) {
+    var intRegex = /^\d+$/;
+    if (intRegex.test(number)) {
+      return this.arabic2Roman(number);
+    }
+    else {
+      return this.roman2Arabic(number);
+    }
+
+  };
+
+  var map = {};
+  obj.ARABIC_TO_ROMAN.forEach(function(convert) {
+    map[convert.roman] = convert.arabic;
+  });
+
+  obj["ROMAN_TO_ARABIC"] = map;
+
+  return obj;
 };

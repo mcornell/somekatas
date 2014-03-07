@@ -93,4 +93,12 @@ describe("RomanNumerals", function() {
     });
   });
 
+  describe("Roman to Arabic", function() {
+    converts.forEach(function(run) {
+      it("Converts " + run.roman + " to " + run.arabic, function() {
+        expect(romanNumerals.convert(run.roman)).toBe(run.arabic);
+      });
+    });
+  });
+
 });
