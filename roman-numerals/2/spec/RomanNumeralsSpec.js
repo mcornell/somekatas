@@ -42,7 +42,26 @@ describe("RomanNumerals", function() {
       arabic: 50,
       roman: "L"
     },
-
+    {
+      arabic: 90,
+      roman: "XC"
+    },
+    {
+      arabic: 100,
+      roman: "C"
+    },
+    {
+      arabic: 340,
+      roman: "CCCXL"
+    },
+    {
+      arabic: 400,
+      roman: "CD"
+    },
+    {
+      arabic: 500,
+      roman: "D"
+    },
   ]
 
   beforeEach(function() {
