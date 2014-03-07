@@ -1,6 +1,8 @@
 function RomanNumerals() {
   value: "",
   ARABIC_TO_ROMAN = {
+    1000: "M",
+    900: "CM",
     500: "D",
     400: "CD",
     100: "C",
@@ -25,6 +27,8 @@ RomanNumerals.prototype.appendValue = function(number, numValue) {
 
 RomanNumerals.prototype.convert = function(number) {
   this.value = "";
+  number = this.appendValue(number, 1000);
+  number = this.appendValue(number, 900);
   number = this.appendValue(number, 500);
   number = this.appendValue(number, 400);
   number = this.appendValue(number, 100);

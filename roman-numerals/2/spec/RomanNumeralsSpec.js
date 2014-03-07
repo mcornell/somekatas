@@ -62,7 +62,24 @@ describe("RomanNumerals", function() {
       arabic: 500,
       roman: "D"
     },
-  ]
+    {
+      arabic: 900,
+      roman: "CM"
+    },
+    {
+      arabic: 1000,
+      roman: "M"
+    },
+
+    {
+      arabic: 2014,
+      roman: "MMXIV"
+    },
+    {
+      arabic: 3888,
+      roman: "MMMDCCCLXXXVIII"
+    },
+  ];
 
   beforeEach(function() {
     romanNumerals = new RomanNumerals();
