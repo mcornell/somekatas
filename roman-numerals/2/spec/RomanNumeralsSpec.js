@@ -18,6 +18,10 @@ describe("RomanNumerals", function() {
       arabic: 6,
       roman: "VI"
     },
+    {
+      arabic: 10,
+      roman: "X"
+    },
   ]
 
   beforeEach(function() {
