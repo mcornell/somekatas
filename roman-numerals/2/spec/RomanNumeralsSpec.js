@@ -11,6 +11,10 @@ describe("RomanNumerals", function() {
       roman: "II"
     },
     {
+      arabic: 4,
+      roman: "IV"
+    },
+    {
       arabic: 5,
       roman: "V"
     },
@@ -19,9 +23,26 @@ describe("RomanNumerals", function() {
       roman: "VI"
     },
     {
+      arabic: 9,
+      roman: "IX"
+    },
+    {
       arabic: 10,
       roman: "X"
     },
+    {
+      arabic: 29,
+      roman: "XXIX"
+    },
+    {
+      arabic: 40,
+      roman: "XL"
+    },
+    {
+      arabic: 50,
+      roman: "L"
+    },
+
   ]
 
   beforeEach(function() {
