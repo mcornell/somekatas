@@ -9,5 +9,8 @@ describe("Bowling Game", function() {
     expect(game.calculateScore("--------------------")).toBe(0);
   });
 
+  it("Can calculate a perfect game", function() {
+    expect(game.calculateScore("XXXXXXXXXXXX")).toBe(300);
+  });
 
 });
