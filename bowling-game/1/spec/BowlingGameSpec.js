@@ -10,11 +10,20 @@ describe("Bowling Game", function() {
   });
 
   it("can split a game string into a Frame array", function() {
-    var frames = game.convertGameStringToFrames("XXXXXXXXXXXX");
+    var frames = game.convertGameStringToFrames("39XXX4/XXXXXXX");
     console.log(frames);
     expect(frames.length).toBe(10);
+    expect(frames[0].ball1).toBe('3');
+    expect(frames[0].ball2).toBe('9');
+    expect(frames[0].ball3).toBe('X');
+
     expect(frames[1].ball1).toBe('X');
-    expect(frames[1].ball2).toBe(null);
+    expect(frames[1].ball2).toBe('X');
+    expect(frames[1].ball3).toBe('X');
+
+    expect(frames[2].ball1).toBe('X');
+    expect(frames[2].ball2).toBe('X');
+    expect(frames[2].ball3).toBe('4');
   });
 
   it("Can calculate a perfect game", function() {

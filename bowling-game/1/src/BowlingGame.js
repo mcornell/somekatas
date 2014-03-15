@@ -1,110 +1,112 @@
-function BowlingGame() {};
+function BowlingGame() {
+  this.strike = 'X';
+  this.spare = '/';
+  this.miss = '-';
+  this.values = {
+    'X': function(ball, currentScore) {
+      return 10;
+    },
+    '-': function(ball, currentScore) {
+      return 0;
+    },
+    '/': function(ball, currentScore) {
+      return 10 - currentScore;
+    },
+  };
+};
 
-function Frame(ball1, ball2, ballPlus1, ballPlus2) {
-  this.ball1 = ball1
-  this.ball2 = (ball1 === 'X') ? null : ball2,
-  this.ballPlus1 = (ball1 === 'X') ? ball2 : ballPlus1,
-  this.ballPlus2 = (ball1 === 'X') ? ballPlus1 : ballPlus2
+function Frame(ballsToScoreFrame, number) {
+  this.ball1 = ballsToScoreFrame[0];
+  this.ball2 = ballsToScoreFrame[1];
+  this.ball3 = ballsToScoreFrame[2];
+  this.frameNumber = number;
+  this.score = 0;
 };
 
 Frame.prototype.toString = function frameToString() {
-  var ret = "Ball1: " + this.ball1 +
-    "\nBall2: " + this.ball2 +
-    "\nBallPlus1: " + this.ballPlus1 +
-    "\nBallPlus2: " + this.ballPlus2;
+  var ret = "Frame " + this.frameNumber + "[" + this.ball1 +
+    "," + this.ball2 +
+    "," + this.ball3 + "] : " + this.score;
   return ret;
-}
+};
 
 BowlingGame.prototype.convertGameStringToFrames = function(gameString) {
   var frames = [],
     balls = gameString.split('');
 
-  for (var i = 0, ballIdx = 0; i < 10 && ballIdx < gameString.length; i++, ballIdx++) {
-    console.log("i = " + i + " ballIdx = " + ballIdx);
-    if (i === 9) {
-      frames.push({
-        ball1: balls[ballIdx],
-        ball2: balls[ballIdx + 1],
-        ball3: balls[ballIdx + 2]
-      });
-    }
-    else {
-      var frame = new Frame(balls[ballIdx], balls[ballIdx + 1], balls[ballIdx + 2], balls[ballIdx + 3]);
-      frames.push(frame);
-      if (frame.ball2 !== null) {
-        ballIdx++;
-      }
-    }
+  for (var i = 0, frameNumber = 1; i < gameString.length && frameNumber < 11; i++, frameNumber++) {
+    var frameI = new Frame(balls.slice(i, i + 3), frameNumber);
+    console.log(frameI.toString());
+    frames.push(frameI);
 
+
+    if (frameI.ball1 !== this.strike) {
+      i++;
+    }
   }
+
   return frames;
 };
 
-BowlingGame.prototype.scoreForBall = function(ball) {
-  console.log("the ball is: " + ball);
-  if (ball === 'X' || ball === '/') {
-    return 10;
-  }
-  else if (ball === '-') {
-    return 0;
-  }
-  return ball;
-};
-
-BowlingGame.prototype.scoreStrikeFrame = function(frame) {
-  var score = 10;
-  if (frame.ballPlus2 === '/') {
-    score += 10;
+BowlingGame.prototype.scoreForBall = function(ball, currentScore) {
+  var ballScore = 0;
+  if (/^\d$/.test(ball)) {
+    ballScore = parseInt(ball);
   }
   else {
-    score += this.scoreForBall(frame.ballPlus1);
-    score += this.scoreForBall(frame.ballPlus2);
+    ballScore = this.values[ball](ball, currentScore);
   }
-  return score;
+  // else if (ball === this.strike) {
+  //   ballScore = 10;
+  // }
+  // else if (ball === this.miss) {
+  //   ballScore = 0;
+  // }
+  // else if (ball === this.spare) {
+  //   ballScore = 10 - currentScore;
+  // }
+
+  return ballScore;
 };
 
-BowlingGame.prototype.scoreOneThruNineFrame = function(frame) {
-  var score = 0;
-  if (frame.ball1 === 'X') {
-    score = this.scoreStrikeFrame(frame);
-  }
-  else if (frame.ball2 === '/') {
-    score += 10;
-    score += this.scoreForBall(frame.ballPlus1);
-  }
-  else {
-    score += this.scoreForBall(frame.ball1);
-    score += this.scoreForBall(frame.ball2);
-  }
-  return score;
-};
 
-BowlingGame.prototype.scoreForFrame = function(frame) {
+BowlingGame.prototype.scoreForFrame = function(frame, index, frameArray) {
   var score = 0;
   console.log("The frame is: " + frame);
-  if (frame.ball3 === undefined) {
-    score = this.scoreOneThruNineFrame(frame);
+  // check for strike by scoring first ball
+  score = this.scoreForBall(frame.ball1, score);
+  console.log("score " + score + " is " + typeof score);
+  if (score === 10) {
+    // NEXT TWO BALLS ARE SCORED to get total for this frame
+    var ball2 = this.scoreForBall(frame.ball2, 0);
+    var ball3 = this.scoreForBall(frame.ball3, ball2);
+    score = score + ball2 + ball3;
+    console.log("score " + score + " is " + typeof score);
   }
   else {
-    if (frame.ball2 === '/') {
-      score = 10;
-      score += this.scoreForBall(frame.ball3);
-    }
-    else {
-      score += this.scoreForBall(frame.ball1);
-      score += this.scoreForBall(frame.ball2);
-      score += this.scoreForBall(frame.ball3);
+    score = score + this.scoreForBall(frame.ball2, score);
+    if (score === 10) {
+      // Spare, so score 1 more:
+      score = score + this.scoreForBall(frame.ball3, score);
     }
   }
-  return score;
+  frame.score = score;
+};
+
+BowlingGame.prototype.addScores = function(accum, currentScore, index, array) {
+  return accum + currentScore;
+};
+
+BowlingGame.prototype.scoreFrames = function(frameArray) {
+  frameArray.forEach(this.scoreForFrame, this);
+  var frameScores = frameArray.map(function(frame) {
+    return frame.score;
+  });
+  return frameScores.reduce(this.addScores);
 };
 
 BowlingGame.prototype.calculateScore = function(game) {
-  var score = 0,
-    frames = this.convertGameStringToFrames(game);
-  for (var frame = 0; frame < frames.length; frame++) {
-    score += this.scoreForFrame(frames[frame]);
-    console.log("Score is: " + score + " after frame " + (frame + 1));
-  }
-  return score;
+  var frames = this.convertGameStringToFrames(game);
+
+  return this.scoreFrames(frames);
 };
