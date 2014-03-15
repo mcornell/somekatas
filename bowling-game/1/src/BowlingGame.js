@@ -3,13 +3,13 @@ function BowlingGame() {
   this.spare = '/';
   this.miss = '-';
   this.values = {
-    'X': function(ball, currentScore) {
+    'X': function(currentScore) {
       return 10;
     },
-    '-': function(ball, currentScore) {
+    '-': function(currentScore) {
       return 0;
     },
-    '/': function(ball, currentScore) {
+    '/': function(currentScore) {
       return 10 - currentScore;
     },
   };
@@ -36,9 +36,8 @@ BowlingGame.prototype.convertGameStringToFrames = function(gameString) {
 
   for (var i = 0, frameNumber = 1; i < gameString.length && frameNumber < 11; i++, frameNumber++) {
     var frameI = new Frame(balls.slice(i, i + 3), frameNumber);
-    console.log(frameI.toString());
-    frames.push(frameI);
 
+    frames.push(frameI);
 
     if (frameI.ball1 !== this.strike) {
       i++;
@@ -54,17 +53,8 @@ BowlingGame.prototype.scoreForBall = function(ball, currentScore) {
     ballScore = parseInt(ball);
   }
   else {
-    ballScore = this.values[ball](ball, currentScore);
+    ballScore = this.values[ball](currentScore);
   }
-  // else if (ball === this.strike) {
-  //   ballScore = 10;
-  // }
-  // else if (ball === this.miss) {
-  //   ballScore = 0;
-  // }
-  // else if (ball === this.spare) {
-  //   ballScore = 10 - currentScore;
-  // }
 
   return ballScore;
 };
