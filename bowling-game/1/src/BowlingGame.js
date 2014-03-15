@@ -48,42 +48,31 @@ BowlingGame.prototype.convertGameStringToFrames = function(gameString) {
 };
 
 BowlingGame.prototype.scoreForBall = function(ball, currentScore) {
-  var ballScore = 0;
   if (/^\d$/.test(ball)) {
-    ballScore = parseInt(ball);
+    return parseInt(ball);
   }
-  else {
-    ballScore = this.values[ball](currentScore);
-  }
-
-  return ballScore;
+  return this.values[ball](currentScore);
 };
 
 
-BowlingGame.prototype.scoreForFrame = function(frame, index, frameArray) {
-  var score = 0;
-  console.log("The frame is: " + frame);
-  // check for strike by scoring first ball
-  score = this.scoreForBall(frame.ball1, score);
-  console.log("score " + score + " is " + typeof score);
-  if (score === 10) {
-    // NEXT TWO BALLS ARE SCORED to get total for this frame
+BowlingGame.prototype.scoreForFrame = function(frame) {
+  var score = this.scoreForBall(frame.ball1, score);
+
+  if (score === 10) { // Strike
     var ball2 = this.scoreForBall(frame.ball2, 0);
     var ball3 = this.scoreForBall(frame.ball3, ball2);
     score = score + ball2 + ball3;
-    console.log("score " + score + " is " + typeof score);
   }
   else {
     score = score + this.scoreForBall(frame.ball2, score);
-    if (score === 10) {
-      // Spare, so score 1 more:
+    if (score === 10) { // spare
       score = score + this.scoreForBall(frame.ball3, score);
     }
   }
   frame.score = score;
 };
 
-BowlingGame.prototype.addScores = function(accum, currentScore, index, array) {
+BowlingGame.prototype.addScores = function(accum, currentScore) {
   return accum + currentScore;
 };
 
