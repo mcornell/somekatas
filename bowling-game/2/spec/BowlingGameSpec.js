@@ -21,13 +21,13 @@ describe("BowlingGame", function() {
     expect(game.getScore()).toBe(20);
   });
 
-  // it("can score a single spare", function() {
-  //   game.roll(5);
-  //   game.roll(5);
-  //   game.roll(3);
-  //   rollMany(17, 0);
-  //   expect(game.getScore()).toBe(16);
-  // });
+  it("can score a single spare", function() {
+    game.roll(5);
+    game.roll(5);
+    game.roll(3);
+    rollMany(17, 0);
+    expect(game.getScore()).toBe(16);
+  });
 
 
 });
