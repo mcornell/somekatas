@@ -12,6 +12,10 @@ describe("BowlingGame", function() {
     game.roll(5);
   }
 
+  var rollStrike = function() {
+    game.roll(10);
+  }
+
   beforeEach(function() {
     game = new BowlingGame();
   });
@@ -34,7 +38,7 @@ describe("BowlingGame", function() {
   });
 
   it("can score a single strike", function() {
-    game.roll(10);
+    rollStrike();
     game.roll(3);
     game.roll(4);
     rollMany(16, 0);
