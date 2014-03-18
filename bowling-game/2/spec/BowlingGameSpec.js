@@ -7,6 +7,11 @@ describe("BowlingGame", function() {
     }
   };
 
+  var rollSpare = function() {
+    game.roll(5);
+    game.roll(5);
+  }
+
   beforeEach(function() {
     game = new BowlingGame();
   });
@@ -22,8 +27,7 @@ describe("BowlingGame", function() {
   });
 
   it("can score a single spare", function() {
-    game.roll(5);
-    game.roll(5);
+    rollSpare();
     game.roll(3);
     rollMany(17, 0);
     expect(game.getScore()).toBe(16);
