@@ -50,5 +50,18 @@ describe("BowlingGame", function() {
     expect(game.getScore()).toBe(300);
   });
 
-
+  it("can score a dutch game", function() {
+    rollStrike();
+    rollSpare();
+    rollStrike();
+    rollSpare();
+    rollStrike();
+    rollSpare();
+    rollStrike();
+    rollSpare();
+    rollStrike();
+    rollSpare();
+    rollStrike();
+    expect(game.getScore()).toBe(200);
+  });
 });
