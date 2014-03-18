@@ -45,5 +45,10 @@ describe("BowlingGame", function() {
     expect(game.getScore()).toBe(24);
   });
 
+  it("can score a perfect game", function() {
+    rollMany(12, 10);
+    expect(game.getScore()).toBe(300);
+  });
+
 
 });
