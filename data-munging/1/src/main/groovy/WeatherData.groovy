@@ -6,20 +6,43 @@
  */
 class WeatherDataParser {
     WeatherData parseLine(String line) {
-        def result = new WeatherData()
+        def result 
 
         def splitted = line.split()
-        result.with {
-        	day = convertColumnToInteger(splitted[0])
-        	maxTemp = convertColumnToInteger(splitted[1])
-        	minTemp = convertColumnToInteger(splitted[2])
-        	avgTemp = convertColumnToInteger(splitted[3])
+        if (splitted.size() > 0 && splitted[0].isInteger()) {
+            result = new WeatherData()
+            result.with {
+            	day = convertColumnToInteger(splitted[0])
+            	maxTemp = convertColumnToInteger(splitted[1])
+            	minTemp = convertColumnToInteger(splitted[2])
+            	avgTemp = convertColumnToInteger(splitted[3])
+            }
+            result.spread = result.maxTemp - result.minTemp
         }
         result
     }
 
     Integer convertColumnToInteger(String column) {
     	column.collectReplacements { str -> str == '*' ? '' : null } as Integer
+    }
+
+    List<WeatherData> readData(def dataFile) {
+        def data = []
+        dataFile.eachLine {
+            def day = parseLine(it)
+            if (day) {
+                data << day
+            }
+        }
+        data
+    }
+
+    WeatherData findLargestSpread(def dataFile) {
+        def sortedBySpread = readData(dataFile).sort { a, b -> b.spread <=> a.spread }
+
+        def largestSpread = sortedBySpread[0]
+        println "Day: ${largestSpread.day} had the largest temperature spread of ${largestSpread.spread} degrees"
+        largestSpread
     }
 }
 
@@ -28,4 +51,5 @@ class WeatherData {
 	Integer minTemp
 	Integer maxTemp
 	Integer avgTemp
+    Integer spread
 }
