@@ -36,13 +36,13 @@ class FootballDataSpec extends Specification {
         result[0].name == 'Arsenal'
         result[19].name == 'Leicester'
     }
-/*
-    def "it can determine the day with the largest spread in temperature"() {
+
+    def "it can determine the team with the largest spread in goals for and against"() {
         when:
-        def result = weatherDataParser.findLargestSpread(dataFile)
+        def result = footballDataParser.findLargestSpread(dataFile)
         then:
-        result.day == 9
-        result.spread == 54
+        result.name == 'Arsenal'
+        result.spread == 43
     }
-    */
+    
 }

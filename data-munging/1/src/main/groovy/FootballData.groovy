@@ -16,6 +16,7 @@ class FootballDataParser {
             	goalsFor = convertColumnToInteger(splitted[6])
             	goalsAgainst = convertColumnToInteger(splitted[8])
             }
+            result.spread = result.goalsFor - result.goalsAgainst
         }
         result
     }
@@ -35,6 +36,13 @@ class FootballDataParser {
         data
     }
 
+    FootballData findLargestSpread(def dataFile) {
+        def sortedBySpread = readData(dataFile).sort { a, b -> b.spread <=> a.spread }
+
+        def largestSpread = sortedBySpread[0]
+        println "${largestSpread.name} had the largest goals spread of ${largestSpread.spread} with ${largestSpread.goalsFor} for and ${largestSpread.goalsAgainst} against"
+        largestSpread
+    }
 
 }
 
@@ -42,4 +50,5 @@ class FootballData {
 	String name
 	Integer goalsFor
 	Integer goalsAgainst
+    Integer spread
 }
