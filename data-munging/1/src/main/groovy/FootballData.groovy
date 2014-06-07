@@ -9,18 +9,30 @@ class FootballDataParser {
         def result 
 
         def splitted = line.split()
-    
-        result = new FootballData()
-        result.with {
-        	name = splitted[1]
-        	goalsFor = convertColumnToInteger(splitted[6])
-        	goalsAgainst = convertColumnToInteger(splitted[8])
+        if (splitted.size() == 10) {
+            result = new FootballData()
+            result.with {
+            	name = splitted[1]
+            	goalsFor = convertColumnToInteger(splitted[6])
+            	goalsAgainst = convertColumnToInteger(splitted[8])
+            }
         }
         result
     }
 
     Integer convertColumnToInteger(String column) {
     	column.collectReplacements { str -> str == '*' ? '' : null } as Integer
+    }
+
+    List<FootballData> readData(def dataFile) {
+        def data = []
+        dataFile.eachLine {
+            def team = parseLine(it)
+            if (team) {
+                data << team
+            }
+        }
+        data
     }
 
 

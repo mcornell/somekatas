@@ -27,16 +27,16 @@ class FootballDataSpec extends Specification {
         result.goalsFor == 74
         result.goalsAgainst == 52
     }
-/*
-    def "it can read all of the temperature data for a day in the file"() {
-        when:
-        def result = weatherDataParser.readData(dataFile)
-        then:
-        result.size == 30
-        result[0].day == 1
-        result[28].day == 29
-    }
 
+    def "it can read all of the team data"() {
+        when:
+        def result = footballDataParser.readData(dataFile)
+        then:
+        result.size == 20
+        result[0].name == 'Arsenal'
+        result[19].name == 'Leicester'
+    }
+/*
     def "it can determine the day with the largest spread in temperature"() {
         when:
         def result = weatherDataParser.findLargestSpread(dataFile)
